@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText txtApellidos, txtNombres, txtID, txtIsoPais, txtEdad;
     autores lstAutores;
+    TextView lblTitulo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +42,16 @@ public class MainActivity extends AppCompatActivity {
         txtNombres = findViewById(R.id.txtNombres);
         txtIsoPais = findViewById(R.id.txtIsoPais);
         txtEdad = findViewById(R.id.txtEdad);
+        lblTitulo = findViewById(R.id.lblTitulo);
+
         lstAutores = new autores(
                 this,
                 "biblioteca.db",
                 1);
+
+        Bundle extras = getIntent().getExtras();
+        lblTitulo.setText("BIENVENIDO " + extras.getString("usuario"));
+
     }
 
     public void cmdCrear_onClick(View v)
@@ -129,5 +137,10 @@ public class MainActivity extends AppCompatActivity {
         }
         else
             Toast.makeText(this,"ERROR BORRANDO REGISTRO", Toast.LENGTH_LONG).show();
+    }
+
+    public void cmdRegresar_onClick(View v)
+    {
+        finish();
     }
 }
